@@ -2,6 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types><members>*</members><name>ApexClass</name></types>
     <types><members>*</members><name>CustomApplication</name></types>
+    <types><members>SalesforceFileWorkspaceLogo</members><name>ContentAsset</name></types>
     <types><members>*</members><name>CustomObject</name></types>
     <types><members>*</members><name>FlexiPage</name></types>
     <types><members>*</members><name>LightningComponentBundle</name></types>

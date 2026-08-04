@@ -6,5 +6,5 @@
     >true</enableHistory><enableReports>true</enableReports>
     <label>File Placement</label><nameField><displayFormat>FP-{000000}</displayFormat><label
         >Placement Number</label><type>AutoNumber</type></nameField>
-    <pluralLabel>File Placements</pluralLabel><sharingModel>ReadWrite</sharingModel>
+    <pluralLabel>File Placements</pluralLabel><sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

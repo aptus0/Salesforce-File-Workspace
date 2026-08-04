@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
-    <brand><headerColor>#172033</headerColor><shouldOverrideOrgTheme>true</shouldOverrideOrgTheme></brand>
+    <brand>
+        <headerColor>#172033</headerColor>
+        <logo>SalesforceFileWorkspaceLogo</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
     <description>Open-source workspace for managing Salesforce Files.</description>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>

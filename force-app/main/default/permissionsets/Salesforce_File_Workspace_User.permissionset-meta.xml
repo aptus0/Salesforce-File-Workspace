@@ -20,8 +20,6 @@
         >true</readable></fieldPermissions>
     <fieldPermissions><editable>true</editable><field>SFW_Folder__c.Parent_Folder__c</field><readable
         >true</readable></fieldPermissions>
-    <fieldPermissions><editable>true</editable><field>SFW_File_Placement__c.Content_Document_Id__c</field><readable
-        >true</readable></fieldPermissions>
     <fieldPermissions><editable>true</editable><field>SFW_File_Placement__c.Is_Favorite__c</field><readable
         >true</readable></fieldPermissions>
     <tabSettings><tab>Salesforce_File_Workspace</tab><visibility>Visible</visibility></tabSettings>

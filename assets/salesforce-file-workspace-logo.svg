@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Salesforce File Workspace</title>
+  <desc id="desc">A blue workspace tile with a structured white folder and connected file mark.</desc>
+  <defs>
+    <linearGradient id="background" x1="56" y1="28" x2="456" y2="484" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B5CAB"/>
+      <stop offset="1" stop-color="#16325C"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="126" y1="158" x2="394" y2="384" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D7E9FF"/>
+    </linearGradient>
+    <filter id="shadow" x="70" y="95" width="372" height="330" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#071C33" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#background)"/>
+  <path d="M70 365c32 52 91 87 158 87h58c68 0 127-36 159-90" fill="none" stroke="#20A6E9" stroke-width="14" stroke-linecap="round" opacity="0.48"/>
+  <g filter="url(#shadow)">
+    <path d="M112 188c0-25 20-45 45-45h76l34 38h88c25 0 45 20 45 45v139c0 25-20 45-45 45H157c-25 0-45-20-45-45V188Z" fill="url(#folder)"/>
+    <path d="M112 235h288v130c0 25-20 45-45 45H157c-25 0-45-20-45-45V235Z" fill="#FFFFFF"/>
+    <rect x="184" y="269" width="144" height="22" rx="11" fill="#0B5CAB"/>
+    <rect x="184" y="310" width="104" height="18" rx="9" fill="#65B5E8"/>
+    <circle cx="161" cy="280" r="14" fill="#20A6E9"/>
+    <circle cx="161" cy="319" r="14" fill="#0B5CAB"/>
+    <path d="M312 318h55v55h-55z" fill="#D7E9FF"/>
+    <path d="M326 332h27v5h-27zm0 11h27v5h-27zm0 11h19v5h-19z" fill="#0B5CAB"/>
+  </g>
+</svg>

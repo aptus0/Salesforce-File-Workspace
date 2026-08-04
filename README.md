@@ -2,12 +2,15 @@
 
 An open-source, deployable Salesforce file-management workspace built with **Lightning Web Components**, **Apex**, and **Salesforce Files**. It combines Windows-style navigation with an Odoo-inspired operational layout while respecting Salesforce sharing and CRUD/FLS controls.
 
+![Salesforce File Workspace logo](assets/salesforce-file-workspace-logo.svg)
+
 ## Highlights
 
 - Three-panel workspace: navigation, file canvas, inspector
 - Virtual folder hierarchy without duplicating `ContentDocument` records
 - Grid and list views, search, breadcrumbs, upload and download
 - Native Salesforce Lightning icons (`standard:folder`, `standard:file`, `doctype:*`)
+- Branded App Launcher tile delivered as deployable `ContentAsset` metadata
 - User-mode SOQL/DML and explicit permission checks
 - Responsive, keyboard-friendly SLDS interface
 - No external server, OAuth proxy, namespace, or OrgPulse dependency
