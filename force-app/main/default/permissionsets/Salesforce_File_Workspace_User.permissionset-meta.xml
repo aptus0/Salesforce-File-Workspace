@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Salesforce File Workspace User</label><description
+    >Access to the File Workspace application and virtual folder metadata.</description>
+    <applicationVisibilities><application>Salesforce_File_Workspace</application><visible
+        >true</visible></applicationVisibilities>
+    <classAccesses><apexClass>SFWFileController</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SFWFileRepository</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SFWFileSecurity</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SFWFileService</apexClass><enabled>true</enabled></classAccesses>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit
+        >true</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords><object
+        >SFW_Folder__c</object><viewAllRecords>false</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit
+        >true</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords><object
+        >SFW_File_Placement__c</object><viewAllRecords>false</viewAllRecords></objectPermissions>
+    <fieldPermissions><editable>true</editable><field>SFW_Folder__c.Icon_Name__c</field><readable
+        >true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>SFW_Folder__c.Is_Archived__c</field><readable
+        >true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>SFW_Folder__c.Parent_Folder__c</field><readable
+        >true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>SFW_File_Placement__c.Content_Document_Id__c</field><readable
+        >true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>SFW_File_Placement__c.Is_Favorite__c</field><readable
+        >true</readable></fieldPermissions>
+    <tabSettings><tab>Salesforce_File_Workspace</tab><visibility>Visible</visibility></tabSettings>
+</PermissionSet>
