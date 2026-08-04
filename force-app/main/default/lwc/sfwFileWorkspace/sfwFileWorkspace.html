@@ -1,0 +1,279 @@
+<template>
+    <section class="workspace" aria-label="Salesforce File Workspace">
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand-icon"
+                    ><lightning-icon
+                        icon-name="standard:file"
+                        size="small"
+                        alternative-text="File Workspace"
+                    ></lightning-icon
+                ></span>
+                <div>
+                    <h1>File Workspace</h1>
+                    <p>Organize Salesforce Files without leaving your org</p>
+                </div>
+            </div>
+            <div class="top-actions">
+                <lightning-button-icon
+                    icon-name="utility:refresh"
+                    alternative-text="Refresh"
+                    title="Refresh"
+                    onclick="
+                        {
+                            refresh;
+                        }
+                    "
+                ></lightning-button-icon>
+                <lightning-button
+                    label="New folder"
+                    icon-name="utility:new_folder"
+                    variant="brand"
+                    onclick="
+                        {
+                            openFolderDialog;
+                        }
+                    "
+                ></lightning-button>
+            </div>
+        </header>
+
+        <div class="commandbar">
+            <nav class="breadcrumbs" aria-label="Current folder">
+                <button
+                    class="crumb"
+                    data-id=""
+                    onclick="
+                        {
+                            selectFolder;
+                        }
+                    "
+                >
+                    <lightning-icon icon-name="utility:home" size="xx-small"></lightning-icon> Workspace
+                </button>
+                <template lwc:if="{selectedFolder}"><span>/</span><span>{selectedFolder.name}</span></template>
+            </nav>
+            <lightning-input
+                type="search"
+                variant="label-hidden"
+                label="Search files"
+                placeholder="Search files and folders"
+                value="{searchTerm}"
+                onchange="
+                    {
+                        handleSearch;
+                    }
+                "
+            ></lightning-input>
+            <div class="view-toggle" role="group" aria-label="View mode">
+                <lightning-button-icon-stateful
+                    icon-name="utility:apps"
+                    selected="{isGrid}"
+                    alternative-text="Grid view"
+                    data-view="grid"
+                    onclick="
+                        {
+                            changeView;
+                        }
+                    "
+                ></lightning-button-icon-stateful>
+                <lightning-button-icon-stateful
+                    icon-name="utility:rows"
+                    selected="{isList}"
+                    alternative-text="List view"
+                    data-view="list"
+                    onclick="
+                        {
+                            changeView;
+                        }
+                    "
+                ></lightning-button-icon-stateful>
+            </div>
+        </div>
+
+        <div class="body">
+            <aside class="sidebar" aria-label="File navigation">
+                <template for:each="{navigationItems}" for:item="item">
+                    <button
+                        key="{item.id}"
+                        class="{item.className}"
+                        data-id="{item.id}"
+                        onclick="
+                            {
+                                selectFolder;
+                            }
+                        "
+                    >
+                        <lightning-icon icon-name="{item.iconName}" size="x-small"></lightning-icon
+                        ><span>{item.name}</span><span class="count">{item.count}</span>
+                    </button>
+                </template>
+                <div class="sidebar-label">Folders</div>
+                <template for:each="{folderItems}" for:item="folder">
+                    <button
+                        key="{folder.id}"
+                        class="{folder.className}"
+                        data-id="{folder.id}"
+                        onclick="
+                            {
+                                selectFolder;
+                            }
+                        "
+                    >
+                        <lightning-icon icon-name="{folder.iconName}" size="x-small"></lightning-icon
+                        ><span>{folder.name}</span>
+                    </button>
+                </template>
+            </aside>
+
+            <main class="content" id="main-content">
+                <div class="content-heading">
+                    <div>
+                        <h2>{workspaceTitle}</h2>
+                        <p>{resultLabel}</p>
+                    </div>
+                    <template lwc:if="{selectedFolderId}">
+                        <lightning-file-upload
+                            label="Upload files"
+                            name="workspaceUpload"
+                            record-id="{selectedFolderId}"
+                            multiple
+                            onuploadfinished="{handleUploadFinished}"
+                        ></lightning-file-upload>
+                    </template>
+                </div>
+
+                <template lwc:if="{loading}"
+                    ><lightning-spinner alternative-text="Loading workspace" size="medium"></lightning-spinner
+                ></template>
+                <template lwc:elseif="{hasFiles}">
+                    <div class="{contentClass}" role="list" aria-label="Files">
+                        <template for:each="{files}" for:item="file">
+                            <article
+                                key="{file.id}"
+                                class="{file.cardClass}"
+                                role="listitem"
+                                data-id="{file.id}"
+                                onclick="
+                                    {
+                                        selectFile;
+                                    }
+                                "
+                            >
+                                <div class="file-icon">
+                                    <lightning-icon
+                                        icon-name="{file.iconName}"
+                                        size="medium"
+                                        alternative-text="{file.fileType}"
+                                    ></lightning-icon>
+                                </div>
+                                <div class="file-copy">
+                                    <h3 title="{file.title}">{file.title}</h3>
+                                    <p>{file.meta}</p>
+                                </div>
+                                <lightning-button-icon
+                                    icon-name="utility:down"
+                                    variant="bare"
+                                    alternative-text="Download"
+                                    title="Download"
+                                    data-version="{file.versionId}"
+                                    onclick="
+                                        {
+                                            downloadFile;
+                                        }
+                                    "
+                                ></lightning-button-icon>
+                            </article>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="empty">
+                        <lightning-icon icon-name="utility:open_folder" size="large"></lightning-icon>
+                        <h2>This folder is ready</h2>
+                        <p>Upload Salesforce Files or choose another folder.</p>
+                    </div>
+                </template>
+            </main>
+
+            <aside class="inspector" aria-label="File details">
+                <template lwc:if="{selectedFile}">
+                    <div class="inspector-title">
+                        <div class="file-icon large">
+                            <lightning-icon icon-name="{selectedFile.iconName}" size="large"></lightning-icon>
+                        </div>
+                        <h2>{selectedFile.title}</h2>
+                    </div>
+                    <dl>
+                        <dt>Type</dt>
+                        <dd>{selectedFile.fileType}</dd>
+                        <dt>Owner</dt>
+                        <dd>{selectedFile.ownerName}</dd>
+                        <dt>Size</dt>
+                        <dd>{selectedFile.sizeLabel}</dd>
+                        <dt>Modified</dt>
+                        <dd>{selectedFile.modifiedLabel}</dd>
+                    </dl>
+                    <a class="download" href="{selectedFile.downloadUrl}" target="_blank" rel="noopener"
+                        >Download file</a
+                    >
+                </template>
+                <template lwc:else
+                    ><div class="inspector-empty">
+                        <lightning-icon icon-name="utility:preview" size="medium"></lightning-icon>
+                        <p>Select a file to inspect its details.</p>
+                    </div></template
+                >
+            </aside>
+        </div>
+    </section>
+
+    <template lwc:if="{showFolderDialog}">
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            aria-labelledby="folder-dialog-title"
+            class="slds-modal slds-fade-in-open"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="folder-dialog-title" class="slds-text-heading_medium">Create folder</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input
+                        label="Folder name"
+                        value="{newFolderName}"
+                        onchange="
+                            {
+                                changeFolderName;
+                            }
+                        "
+                        required
+                    ></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button
+                        label="Cancel"
+                        onclick="
+                            {
+                                closeFolderDialog;
+                            }
+                        "
+                    ></lightning-button
+                    ><lightning-button
+                        class="slds-m-left_small"
+                        variant="brand"
+                        label="Create"
+                        onclick="
+                            {
+                                createFolder;
+                            }
+                        "
+                    ></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
